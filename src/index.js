@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(express.json());
 
-const db = require("../models");
-// db.sequelize.sync({ force: true });
+const db = require("../src/models");
+// db.sequelize.sync({});
 
 //#region API ROUTES
 
