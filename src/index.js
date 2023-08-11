@@ -8,20 +8,13 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(express.json());
 
+const db = require("../models");
+db.sequelize.sync({ force: true });
+
 //#region API ROUTES
 
 // ===========================
 // NOTE : Add your routes here
-
-app.get("/api", (req, res) => {
-  res.send(`Hello, this is my API`);
-});
-
-app.get("/api/greetings", (req, res, next) => {
-  res.status(200).json({
-    message: "Hello, Student !",
-  });
-});
 
 // ===========================
 
