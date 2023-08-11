@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 const db = require("../models");
-db.sequelize.sync({ force: true });
+// db.sequelize.sync({ force: true });
 
 //#region API ROUTES
 
