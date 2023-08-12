@@ -16,6 +16,11 @@ const db = require("../src/models");
 // ===========================
 // NOTE : Add your routes here
 
+//routes
+const { authRouter } = require("./routers");
+
+app.use("/auth", authRouter);
+
 // ===========================
 
 // not found
