@@ -3,10 +3,20 @@ require("dotenv").config({
   path: path.resolve(__dirname, "../.env"),
 });
 const express = require("express");
+const cors = require("cors");
 
 const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: [
+      process.env.WHITELISTED_DOMAIN &&
+        process.env.WHITELISTED_DOMAIN.split(","),
+    ],
+  })
+);
 
 const db = require("../src/models");
 // db.sequelize.sync({});

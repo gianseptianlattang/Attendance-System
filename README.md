@@ -4,7 +4,8 @@ The Attendance System Web Application is a software solution aimed at managing e
 
 cd project folder
 npm init --y (will add some data in package.json for initialitation)
-npm install express nodemon sequelize mysql2 body-parser sequelize-cli dotenv
+npm i express nodemon sequelize mysql2 body-parser sequelize-cli dotenv
+npm i cors (to join be fe)
 
 cd src folder
 npx sequelize-cli init
