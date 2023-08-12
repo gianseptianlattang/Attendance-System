@@ -14,8 +14,8 @@ module.exports = {
           fullname: "Admin Rasta Nugroho",
           password:
             "$2b$10$aSsG1v5vHv/FKfY0jhpOjOrORXXr2rruZwa6X16EYqleY.ULLg7oe",
-          joinDate: "2023-01-27 07:52:27",
-          birthDate: "2000-01-27 07:52:27",
+          joinDate: "2023-01-27",
+          birthDate: "2000-01-27",
           monthlySalary: 7000000,
           isActive: 1,
           isVerified: 1,
@@ -30,8 +30,8 @@ module.exports = {
           fullname: "Cashier1 Rasta Nugroho",
           password:
             "$2b$10$aSsG1v5vHv/FKfY0jhpOjOrORXXr2rruZwa6X16EYqleY.ULLg7oe",
-          joinDate: "2023-01-27 07:52:27",
-          birthDate: "2000-01-27 07:52:27",
+          joinDate: "2023-01-27",
+          birthDate: "2000-01-27",
           monthlySalary: 10000000,
           isActive: 1,
           isVerified: 1,
@@ -46,8 +46,8 @@ module.exports = {
           fullname: "Cashier2 Rasta Nugroho",
           password:
             "$2b$10$aSsG1v5vHv/FKfY0jhpOjOrORXXr2rruZwa6X16EYqleY.ULLg7oe",
-          joinDate: "2023-01-27 07:52:27",
-          birthDate: "2000-01-27 07:52:27",
+          joinDate: "2023-01-27",
+          birthDate: "2000-01-27",
           monthlySalary: 20000000,
           isActive: 1,
           isVerified: 1,

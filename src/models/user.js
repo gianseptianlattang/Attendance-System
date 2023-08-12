@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       joinDate: {
         type: DataTypes.DATE,
-        defaultValue: true,
       },
       birthDate: {
         type: DataTypes.DATE,

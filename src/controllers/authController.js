@@ -17,7 +17,7 @@ const AuthController = {
 
       let payload = {
         id: userData.id,
-        role: userData.Role.roleName,
+        role: userData.Role.id,
       };
 
       const token = await authService.generateToken(payload);
@@ -28,7 +28,8 @@ const AuthController = {
           username: userData.username,
           email: userData.email,
           fullname: userData.fullname,
-          role: userData.Role.roleName,
+          roleId: userData.roleId,
+          jobTypeId: userData.jobTypeId,
           token,
         },
       });
@@ -40,73 +41,48 @@ const AuthController = {
     }
   },
 
-  //   createCashier: async (req, res) => {
-  //     try {
-  //       const { username, email, password } = req.body;
-  //       const foundUser = await commonService.findUser(username);
-  //       const foundEmail = await commonService.findEmail(email);
-  //       if (foundUser || foundEmail) {
-  //         return authService.validationRegistrationFailed(
-  //           res,
-  //           400,
-  //           "User exists"
-  //         );
-  //       }
+  createUser: async (req, res) => {
+    try {
+      const { email, joinDate, salary, role, jobType } = req.body;
 
-  //       const userData = await authService.createNewCashier(
-  //         username,
-  //         email,
-  //         password
-  //       );
-  //       return res.status(200).json({
-  //         success: "Registration succeed",
-  //         user: userData,
-  //       });
-  //     } catch (err) {
-  //       return res.status(500).json({
-  //         error: "Registration failed",
-  //         message: err.message,
-  //       });
-  //     }
-  //   },
+      const foundEmail = await commonService.findEmail(email);
+      if (foundEmail) {
+        return authService.validationRegistrationFailed(
+          res,
+          400,
+          "User exists"
+        );
+      }
 
-  //   forgotPassword: async (req, res) => {
-  //     try {
-  //       const { email } = req.body;
+      const userData = await authService.createNewUser(
+        email,
+        joinDate,
+        salary,
+        role,
+        jobType
+      );
 
-  //       let payload = {
-  //         email: email,
-  //       };
-  //       const token = await authService.generateToken(payload);
-  //       SendEmail.verifyEmail(email, token);
-  //       return res.status(200).json({
-  //         success: "Reset password succeed, Please verify from email!",
-  //         token,
-  //       });
-  //     } catch (err) {
-  //       return res.status(err.statusCode || 500).json({
-  //         error: "Reset password failed",
-  //         message: err.message,
-  //       });
-  //     }
-  //   },
+      let payload = {
+        id: userData.id,
+        isVerified: userData.isVerified,
+        role: userData.roleId,
+        status: "regist",
+      };
 
-  //   resetPassword: async (req, res) => {
-  //     try {
-  //       const { id, username } = req.userReset;
-  //       const { password } = req.body;
-  //       await authService.updatePassword(id, password);
-  //       return res.status(200).json({
-  //         success: "Reset password succeed",
-  //         username,
-  //       });
-  //     } catch (err) {
-  //       return res.status(err.statusCode || 500).json({
-  //         error: "Reset password failed",
-  //         message: err.message,
-  //       });
-  //     }
-  //   },
+      const token = await authService.generateToken(payload);
+      SendEmail.verifyEmail(email, token);
+      return res.status(200).json({
+        success: "Registration succeed",
+        user: userData,
+        token,
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: "Registration failed",
+        message: err.message,
+      });
+    }
+  },
 };
 
 module.exports = AuthController;

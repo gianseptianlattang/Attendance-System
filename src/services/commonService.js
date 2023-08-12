@@ -5,18 +5,21 @@ require("dotenv").config({
 const bcrypt = require("bcrypt");
 const db = require("../models");
 const users = db.User;
-const profiles = db.User_Profile;
-const carts = db.Cart;
+const roles = db.Role;
+const jobTypes = db.Job_Type;
 
 const findUserId = async (id) => {
-  return await users.findOne({ where: { id: id } });
+  return await users.findOne({
+    where: { id: id },
+    include: [{ model: roles }, { model: jobTypes }],
+  });
 };
 
 const findProfileUserId = async (id) => {
   return await profiles.findOne({ where: { userId: id } });
 };
 
-const findUser = async (username) => {
+const findUsername = async (username) => {
   return await users.findOne({ where: { username: username } });
 };
 
@@ -33,7 +36,7 @@ const validatePassword = async (password, hashedPassword) => {
 };
 
 module.exports = {
-  findUser,
+  findUsername,
   findUserCart,
   findProfileUserId,
   findEmail,

@@ -21,9 +21,9 @@ const SendEmail = {
       html: `<body>
       <h2>Hello shop next door!!</h2>
       <p>
-            Please click the button below to reset your password.
+            Please click the button below to verify and update your personal data.
       </p>
-      <a href="http://localhost:3000/reset-password/${dataToken}" style="background-color: #4CAF50; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: block; width: 200px; margin: 20px auto;">
+      <a href="http://localhost:3000/user /${dataToken}" style="background-color: #4CAF50; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: block; width: 200px; margin: 20px auto;">
             Verify Email
       </a>
       <p>

@@ -19,7 +19,7 @@ app.use(
 );
 
 const db = require("../src/models");
-// db.sequelize.sync({});
+db.sequelize.sync({});
 
 //#region API ROUTES
 
@@ -27,9 +27,10 @@ const db = require("../src/models");
 // NOTE : Add your routes here
 
 //routes
-const { authRouter } = require("./routers");
+const { authRouter, employeeRouter } = require("./routers");
 
 app.use("/auth", authRouter);
+app.use("/employee", employeeRouter);
 
 // ===========================
 

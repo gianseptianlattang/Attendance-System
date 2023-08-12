@@ -15,104 +15,38 @@ const validateLogin = [
   body("password").notEmpty().withMessage("Password is required"),
 ];
 
-// const validateRegistration = [
-//   body("username")
-//     .trim()
-//     .notEmpty()
-//     .withMessage("Username is required")
-//     .custom((value) => {
-//       if (value.includes(" ")) {
-//         throw new Error("Username cannot contain spaces");
-//       }
-//       return true;
-//     }),
+const validateRegistration = [
+  body("email").trim().isEmail().withMessage("Invalid email format"),
+  body("joinDate").notEmpty().withMessage("Join date is required"),
+  body("salary").notEmpty().withMessage("Salary is required"),
+  body("role").notEmpty().withMessage("Role is required"),
+  body("jobType").notEmpty().withMessage("Job type is required"),
+];
 
-//   body("email").trim().isEmail().withMessage("Invalid email format"),
-
-//   body("password")
-//     .isLength({ min: 6 })
-//     .withMessage("Password must be at least 6 characters long")
-//     .matches(/[A-Z]/)
-//     .withMessage("Password must contain at least one capital letter")
-//     .matches(/[!@#$%^&*()\-_=+{}[\]|;:'",.<>/?]/)
-//     .withMessage("Password must contain at least one special character"),
-
-//   body("confirmPassword").custom((value, { req }) => {
-//     if (value !== req.body.password) {
-//       throw new Error("Confirm password doesn't match the password");
-//     }
-//     return true;
-//   }),
-// ];
-
-// const validateUpdateUsernameEmail = [
-//   body("cashierId").trim().notEmpty().withMessage("cashierId is required"),
-//   body("username")
-//     .trim()
-//     .notEmpty()
-//     .withMessage("Username is required")
-//     .custom((value) => {
-//       if (value.includes(" ")) {
-//         throw new Error("Username cannot contain spaces");
-//       }
-//       return true;
-//     }),
-//   body("email").trim().isEmail().withMessage("Invalid email format"),
-// ];
-
-// const validateForgotPassword = [
-//   body("email").trim().isEmail().withMessage("Invalid email format"),
-// ];
-
-// const validateResetPassword = [
-//   body("password")
-//     .isLength({ min: 6 })
-//     .withMessage("Password must be at least 6 characters long")
-//     .matches(/[A-Z]/)
-//     .withMessage("Password must contain at least one capital letter")
-//     .matches(/[!@#$%^&*()\-_=+{}[\]|;:'",.<>/?]/)
-//     .withMessage("Password must contain at least one special character"),
-
-//   body("confirmPassword").custom((value, { req }) => {
-//     if (value !== req.body.password) {
-//       throw new Error("Confirm password doesn't match the password");
-//     }
-//     return true;
-//   }),
-// ];
-
-// const validateUpdatePassword = [
-//   body("cashierId").trim().notEmpty().withMessage("cashierId is required"),
-
-//   body("password")
-//     .isLength({ min: 6 })
-//     .withMessage("Password must be at least 6 characters long")
-//     .matches(/[A-Z]/)
-//     .withMessage("Password must contain at least one capital letter")
-//     .matches(/[!@#$%^&*()\-_=+{}[\]|;:'",.<>/?]/)
-//     .withMessage("Password must contain at least one special character"),
-
-//   body("confirmPassword").custom((value, { req }) => {
-//     if (value !== req.body.password) {
-//       throw new Error("Confirm password doesn't match the password");
-//     }
-//     return true;
-//   }),
-// ];
-
-// const validateUpdateStatus = [
-//   body("cashierId").trim().notEmpty().withMessage("cashierId is required"),
-
-//   body("isActive").trim().notEmpty().withMessage("isActive is required"),
-// ];
+const validateUpdateEmployee = [
+  body("username").notEmpty().withMessage("Invalid email format"),
+  body("fullname").notEmpty().withMessage("Join date is required"),
+  body("birthDate").notEmpty().withMessage("Salary is required"),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long")
+    .matches(/[A-Z]/)
+    .withMessage("Password must contain at least one capital letter")
+    .matches(/[0-9]/)
+    .withMessage("Password must contain at least one number")
+    .matches(/[!@#$%^&*()\-_=+{}[\]|;:'",.<>/?]/)
+    .withMessage("Password must contain at least one special character"),
+  body("confirmPassword").custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error("Confirm password doesn't match the password");
+    }
+    return true;
+  }),
+];
 
 module.exports = {
   validateRequest,
   validateLogin,
-  // validateRegistration,
-  // validateUpdateUsernameEmail,
-  // validateUpdatePassword,
-  // validateUpdateStatus,
-  // validateForgotPassword,
-  // validateResetPassword,
+  validateRegistration,
+  validateUpdateEmployee,
 };
