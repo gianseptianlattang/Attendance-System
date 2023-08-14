@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       monthYear: {
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         allowNull: false,
       },
     },
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Monthly_Working_Days.associate = (models) => {
-    Monthly_Working_Days.hasMany(models.Attendance, {
+    Monthly_Working_Days.hasMany(models.Payroll, {
       foreignKey: "monthlyWorkingDaysId",
     });
   };

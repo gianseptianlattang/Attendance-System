@@ -12,12 +12,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       totalSalary: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
       totalWorkingDays: {
         type: DataTypes.INTEGER,
+        defaultValue: 1,
       },
       monthYear: {
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         allowNull: false,
       },
     },

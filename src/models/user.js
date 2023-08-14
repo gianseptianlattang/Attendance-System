@@ -28,11 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       joinDate: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        type: DataTypes.DATE,
       },
       birthDate: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.DATE,
       },
       monthlySalary: {
         type: DataTypes.INTEGER,

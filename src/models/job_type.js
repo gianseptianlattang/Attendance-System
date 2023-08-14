@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       startTime: {
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       endTime: {
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         allowNull: false,
       },
     },
@@ -20,7 +20,11 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Job_Type.associate = (models) => {
-    Job_Type.hasMany(models.User, { foreignKey: "jobTypeId" });
+    Job_Type.hasMany(models.User, {
+      foreignKey: "jobTypeId",
+      onDelete: "SET NULL",
+      onUpdate: "CASCADE",
+    });
   };
   return Job_Type;
 };

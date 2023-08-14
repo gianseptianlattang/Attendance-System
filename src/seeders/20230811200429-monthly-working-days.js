@@ -8,7 +8,7 @@ module.exports = {
       [
         {
           monthlyWorkingDays: 20,
-          monthYear: "2023-08",
+          monthYear: "2023-08-01",
           createdAt: "2023-01-27 07:52:27",
           updatedAt: "2023-01-27 07:52:27",
         },
