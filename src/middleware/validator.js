@@ -17,7 +17,7 @@ const validateLogin = [
 
 const validateRegistration = [
   body("email").trim().isEmail().withMessage("Invalid email format"),
-  body("joinDate").isDate().withMessage("Invalid join date format"),
+  body("joinDate").notEmpty().withMessage("Invalid join date format"),
   body("salary").notEmpty().withMessage("Salary is required"),
   body("role").notEmpty().withMessage("Role is required"),
   body("jobType").notEmpty().withMessage("Job type is required"),
