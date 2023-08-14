@@ -3,7 +3,7 @@ require("dotenv").config({
   path: path.resolve("../.env"),
 });
 const db = require("../models");
-const { Sequelize, Op, where } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 const users = db.User;
 const payrolls = db.Payroll;
 const attendances = db.Attendance;
@@ -136,7 +136,7 @@ const createCheckIn = async (id, currentDate) => {
 
       const resultAttendance = await findTotalSalaryAndDay(payrollId);
 
-      const test = await updatePayroll(
+      await updatePayroll(
         id,
         resultAttendance.dataValues.totalSalary,
         resultAttendance.dataValues.totalWorkingDays
@@ -196,9 +196,49 @@ const createCheckOut = async (id, currentDate) => {
   }
 };
 
+const getAllReport = async (userId, month, year, sortBy) => {
+  try {
+    const result = await db.sequelize.transaction(async (t) => {
+      const queryOptions = {
+        include: [
+          {
+            model: users,
+          },
+          {
+            model: attendances,
+          },
+        ],
+        where: {
+          userId: userId,
+          monthYear: {
+            [Op.and]: [
+              Sequelize.where(
+                Sequelize.fn("MONTH", Sequelize.col("monthYear")),
+                month
+              ),
+              Sequelize.where(
+                Sequelize.fn("YEAR", Sequelize.col("monthYear")),
+                year
+              ),
+            ],
+          },
+        },
+        order: [[{ model: attendances }, "createdAt", sortBy]],
+      };
+
+      return await payrolls.findAll(queryOptions, { transaction: t });
+    });
+
+    return result;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
 module.exports = {
   validationUpdateDataFailed,
   updateNewUser,
   createCheckIn,
   createCheckOut,
+  getAllReport,
 };

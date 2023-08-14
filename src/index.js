@@ -27,10 +27,11 @@ const db = require("../src/models");
 // NOTE : Add your routes here
 
 //routes
-const { authRouter, employeeRouter } = require("./routers");
+const { authRouter, employeeRouter, adminRouter } = require("./routers");
 
 app.use("/auth", authRouter);
 app.use("/employee", employeeRouter);
+app.use("/admin", adminRouter);
 
 // ===========================
 

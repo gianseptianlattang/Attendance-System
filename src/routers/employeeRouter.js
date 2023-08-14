@@ -25,5 +25,11 @@ router.post(
   verifyEmployee,
   employeeController.createClockOut
 );
+router.get(
+  "/allreport",
+  verifyToken,
+  verifyEmployee,
+  employeeController.getAllReport
+);
 
 module.exports = router;
