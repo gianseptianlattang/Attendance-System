@@ -4,7 +4,7 @@ const {
   validateRequest,
   validateUpdateEmployee,
 } = require("../middleware/validator");
-const { verifyToken } = require("../middleware/auth");
+const { verifyToken, verifyEmployee } = require("../middleware/auth");
 
 router.patch(
   "/user",
@@ -12,6 +12,18 @@ router.patch(
   validateUpdateEmployee,
   validateRequest,
   employeeController.updateEmployee
+);
+router.post(
+  "/clockin",
+  verifyToken,
+  verifyEmployee,
+  employeeController.createClockIn
+);
+router.post(
+  "/clockout",
+  verifyToken,
+  verifyEmployee,
+  employeeController.createClockOut
 );
 
 module.exports = router;

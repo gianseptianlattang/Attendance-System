@@ -80,8 +80,20 @@ const verifyAdmin = async (req, res, next) => {
   next();
 };
 
+const verifyEmployee = async (req, res, next) => {
+  const { role } = req.user;
+  if (role !== 2) {
+    return res.status(404).json({
+      error: "Unauthorized user",
+      message: "User not an admin",
+    });
+  }
+  next();
+};
+
 module.exports = {
   verifyEmployeeStatus,
   verifyToken,
   verifyAdmin,
+  verifyEmployee,
 };

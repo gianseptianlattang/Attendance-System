@@ -40,7 +40,7 @@ const EmployeeController = {
         );
       }
 
-      const newdata = await employeeService.updateNewUser(
+      await employeeService.updateNewUser(
         userData.id,
         username,
         fullname,
@@ -61,6 +61,48 @@ const EmployeeController = {
     } catch (err) {
       return res.status(500).json({
         error: "Update data failed",
+        message: err.message,
+      });
+    }
+  },
+  createClockIn: async (req, res) => {
+    try {
+      const userData = req.user;
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
+      currentDate.setHours(currentDate.getHours() + 7);
+      currentDate.setDate(1);
+      const createData = await employeeService.createCheckIn(
+        userData.id,
+        currentDate
+      );
+      return res.status(200).json({
+        success: "Clock In succeed",
+        data: { createData },
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: "Clock In failed",
+        message: err.message,
+      });
+    }
+  },
+  createClockOut: async (req, res) => {
+    try {
+      const userData = req.user;
+      const currentDate = new Date();
+      currentDate.setHours(currentDate.getHours() + 7);
+      const createData = await employeeService.createCheckOut(
+        userData.id,
+        currentDate
+      );
+      return res.status(200).json({
+        success: "Clock Out succeed",
+        data: { createData },
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: "Clock Out failed",
         message: err.message,
       });
     }

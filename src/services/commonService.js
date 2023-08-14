@@ -7,6 +7,7 @@ const db = require("../models");
 const users = db.User;
 const roles = db.Role;
 const jobTypes = db.Job_Type;
+const monthlyWorkingDays = db.Monthly_Working_Days;
 
 const findUserId = async (id) => {
   return await users.findOne({
@@ -23,10 +24,6 @@ const findUsername = async (username) => {
   return await users.findOne({ where: { username: username } });
 };
 
-const findUserCart = async (id) => {
-  return await carts.findOne({ where: { userId: id } });
-};
-
 const findEmail = async (email) => {
   return await users.findOne({ where: { email: email } });
 };
@@ -37,7 +34,6 @@ const validatePassword = async (password, hashedPassword) => {
 
 module.exports = {
   findUsername,
-  findUserCart,
   findProfileUserId,
   findEmail,
   findUserId,
