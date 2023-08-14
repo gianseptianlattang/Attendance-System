@@ -49,10 +49,16 @@ const validateClockIn = [
   body("dailySalary").notEmpty().withMessage("DailySalary is required"),
 ];
 
+const validateUpdateSalary = [
+  body("employeeId").notEmpty().withMessage("EmployeeId is required"),
+  body("monthlySalary").notEmpty().withMessage("MonthlySalary is required"),
+];
+
 module.exports = {
   validateRequest,
   validateLogin,
   validateRegistration,
   validateUpdateEmployee,
   validateClockIn,
+  validateUpdateSalary,
 };

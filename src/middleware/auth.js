@@ -85,7 +85,7 @@ const verifyEmployee = async (req, res, next) => {
   if (role !== 2) {
     return res.status(404).json({
       error: "Unauthorized user",
-      message: "User not an admin",
+      message: "User not an employee",
     });
   }
   next();

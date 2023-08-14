@@ -107,6 +107,38 @@ const EmployeeController = {
       });
     }
   },
+  getAllReport: async (req, res) => {
+    try {
+      const currentDate = new Date();
+      currentDate.setHours(currentDate.getHours() + 7);
+      const currentYear = currentDate.getFullYear();
+      const currentMonth = currentDate.getMonth() + 1;
+      const year = parseInt(req.query.year) || currentYear;
+      const month = parseInt(req.query.month) || currentMonth;
+      const userId = req.user.id;
+      const sortBy = req.query.sort || "DESC";
+
+      const data = await employeeService.getAllReport(
+        userId,
+        month,
+        year,
+        sortBy
+      );
+
+      return res.status(200).json({
+        message: "Get all data succeed",
+        month,
+        year,
+        sortBy,
+        data,
+      });
+    } catch (err) {
+      return res.status(err.statusCode || 500).json({
+        error: "Get all data failed",
+        message: err.message,
+      });
+    }
+  },
 };
 
 module.exports = EmployeeController;
